@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background-color: #ecf0f1;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #bdc3c7;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .delete {
+            background-color: #e74c3c;
+        }
+
+        .delete:hover {
+            background-color: #c0392b;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        a.button.delete {
+            background-color: #e74c3c;
+        }
+    </style>
+    <script>
+        function loadBooks() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "fetchbook.php", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("book-list").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+        window.onload = loadBooks;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Book Management System</h1>
+        <a href="addbook.html" class="button">Add New Book</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Published Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="book-list">
+                <!-- The book list will be loaded here by AJAX -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
